@@ -1,0 +1,10 @@
+{
+  "Arylic devices announce themselves via mDNS (AirPlay). Needs ioBroker in the same network segment; in Docker use host networking.": "Пристрої Arylic повідомляють про себе через mDNS (AirPlay). Потрібен ioBroker в тому ж сегменті мережі; у Docker використовувати мережу хостів.",
+  "Devices": "Пристрої",
+  "Find devices automatically": "Автоматичний пошук пристроїв",
+  "IP address": "IP адреса",
+  "Name": "Ім'я",
+  "Only needed for devices discovery cannot find, e.g. in another subnet.": "Потрібно лише для виявлення пристроїв, які неможливо знайти, напр. в іншій підмережі.",
+  "Poll interval": "Інтервал опитування",
+  "The device reports changes on its own; the poll catches anything missed.": "Пристрій самостійно повідомляє про зміни; опитування фіксує все, що ви пропустили."
+}

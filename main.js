@@ -10,7 +10,6 @@ class Arylic extends utils.Adapter {
      */
     constructor(options = {}) {
         super({ ...options, name: 'arylic' });
-        /** @type {Map<string, ArylicDevice>} */
         this.devices = new Map();
         this.bonjour = null;
         this.on('ready', this.onReady.bind(this));
@@ -114,10 +113,7 @@ class Arylic extends utils.Adapter {
      * @returns {string} usable as an object id segment
      */
     toId(text) {
-        return String(text)
-            .toLowerCase()
-            .replace(this.FORBIDDEN_CHARS, '_')
-            .replace(/[.\s]/g, '_');
+        return String(text).toLowerCase().replace(this.FORBIDDEN_CHARS, '_').replace(/[.\s]/g, '_');
     }
 
     /**

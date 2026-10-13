@@ -65,8 +65,6 @@ well, and the UART API has no wake command. Only the IR remote brings it back.
 - `npm run live` — finds devices via mDNS and reads all values, without ioBroker; nothing is written.
   `npm run live -- 10.0.0.61` connects to one address.
 
-Pushes are tested on Linux only; release tags run the full matrix (Linux, Windows, macOS).
-
 ## Changelog
 
 <!--
