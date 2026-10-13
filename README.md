@@ -40,18 +40,34 @@ Per device, below `arylic.0.<serial>`:
 | `volume` | `VOL` | yes | 0–100 |
 | `maxVolume` | `MXV` | yes | 30–100, upper limit for every source; kept after a factory reset |
 | `mute` | `MUT` | yes | |
-| `source` | `SRC` | yes | one of `sources` |
-| `bass`, `mid`, `treble` | `BAS`, `MID`, `TRE` | yes | −10…10 dB |
-| `led` | `LED` | yes | |
-| `beep` | `BEP` | yes | confirmation tone |
-| `name` | `NAM` | yes | device name, also the AirPlay name |
-| `playing` | `PLA` | no | |
+| `source` | `SRC` | yes | choices from `sources` |
 | `sources` | `LST` | no | available inputs |
+| `playing` | `PLA` | no | |
+| `playPause`, `stop`, `next`, `previous` | `POP`, `STP`, `NXT`, `PRE` | button | |
 | `standby` | `SYS:STANDBY` | button | ⚠️ see below |
+| `sound.bass`, `sound.mid`, `sound.treble` | `BAS`, `MID`, `TRE` | yes | −10…10 dB |
+| `sound.balance` | `BAL` | yes | −100…100 |
+| `sound.virtualBass` | `VBS` | yes | |
+| `sound.eqEnabled`, `sound.eqPreset` | `EQE`, `EQS` | yes | choices from `sound.eqPresets` (`PEQ`) |
+| `sound.crossover`, `sound.crossoverFrequency` | `CFE`, `CFF` | yes | for a subwoofer, 50–300 Hz |
+| `settings.led` | `LED` | yes | |
+| `settings.beep` | `BEP` | yes | confirmation tone |
+| `settings.name` | `NAM` | yes | device name, also the AirPlay name |
+| `settings.muteDelay` | `DLY` | yes | seconds without signal until the output mutes |
+| `settings.powerOnSource` | `POM` | yes | input after power-on, `NONE` = last one |
+| `settings.autoSwitch` | `ASW` | yes | switch back to the previous input |
+| `settings.volumeStep` | `VST` | yes | step for volume up/down, 0–10 |
+| `settings.fixedVolume` | `VOF` | yes | fixed output level, 0 = off |
+| `settings.standbyOnPower` | `SOP` | yes | start in standby after power-up |
 | `info.connected` | | no | TCP connection to the device |
 | `info.ip` | `IPA` | no | |
+| `info.ethernet`, `info.wifi` | `ETH`, `WIF` | no | wired / wireless connection |
+| `info.multiroomChannel`, `info.multiroomMode` | `CHN`, `MRM` | no | |
 | `info.mcuVersion` | `VER` | no | amplifier chip firmware |
 | `info.model`, `info.serial`, `info.firmware` | | no | from the mDNS announcement |
+
+Not included: `PMT` and `COE` restart the device on every change; title, artist and album are not
+sent over TCP; `WWW` (internet) stayed `0` on an LA50 with internet access.
 
 A write is a command (`ack=false`). The device's answer sets the value again with `ack=true` — if it
 stays `ack=false`, the device did not accept the command.
@@ -70,6 +86,10 @@ well, and the UART API has no wake command. Only the IR remote brings it back.
 <!--
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
+
+- (Timo Schneider) sound (balance, EQ, virtual bass, crossover), settings, playback buttons, network status
+- (Timo Schneider) states grouped into `sound`, `settings`, `info`; outdated states are removed
+- (Timo Schneider) choices for input and EQ preset come from the device
 -->
 ### 0.0.2 (2026-10-13)
 

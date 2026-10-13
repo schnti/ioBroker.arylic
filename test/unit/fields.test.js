@@ -1,7 +1,7 @@
 'use strict';
 
 const assert = require('node:assert');
-const { BY_ID, parseMessage, commandFor } = require('../../lib/fields');
+const { BY_ID, parseMessage, commandFor, statesFromList } = require('../../lib/fields');
 
 describe('fields', () => {
     it('parses numbers, booleans and text', () => {
@@ -10,6 +10,7 @@ describe('fields', () => {
         assert.deepStrictEqual(parseMessage('LED:1').value, true);
         assert.deepStrictEqual(parseMessage('LST:NET,BT,LINE-IN').value, 'NET,BT,LINE-IN');
         assert.deepStrictEqual(parseMessage('BAS:-3').value, -3);
+        assert.deepStrictEqual(parseMessage('ETH:1').field.id, 'info.ethernet');
     });
 
     it('decodes the hex device name', () => {
@@ -30,7 +31,21 @@ describe('fields', () => {
         assert.strictEqual(commandFor(BY_ID.get('maxVolume'), 50), 'MXV:50');
         assert.strictEqual(commandFor(BY_ID.get('volume'), '30.6'), 'VOL:31');
         assert.strictEqual(commandFor(BY_ID.get('mute'), true), 'MUT:1');
-        assert.strictEqual(commandFor(BY_ID.get('name'), 'Backyard'), 'NAM:4261636B79617264');
+        assert.strictEqual(commandFor(BY_ID.get('settings.name'), 'Backyard'), 'NAM:4261636B79617264');
+    });
+
+    it('sends plain buttons without a value', () => {
+        assert.strictEqual(commandFor(BY_ID.get('next'), true), 'NXT');
+        assert.strictEqual(commandFor(BY_ID.get('playPause'), true), 'POP');
+    });
+
+    it('turns list answers into state choices', () => {
+        assert.deepStrictEqual(statesFromList('NET,BT,LINE-IN'), { NET: 'NET', BT: 'BT', 'LINE-IN': 'LINE-IN' });
+        assert.deepStrictEqual(statesFromList('0@Flat,1@Classical'), { 0: 'Flat', 1: 'Classical' });
+    });
+
+    it('has no unknown WWW field', () => {
+        assert.deepStrictEqual(parseMessage('WWW:0'), { code: 'WWW' });
     });
 
     it('sends standby only when the button is pressed', () => {
