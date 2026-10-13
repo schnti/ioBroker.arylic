@@ -31,6 +31,9 @@ without any change. ioBroker must be in the same network segment; in Docker, use
 
 Devices in another subnet can be entered by IP address.
 
+Found devices are listed in the instance settings and in the admin's device manager, with their
+connection status, model, serial number and firmware.
+
 ## States
 
 Per device, below `arylic.0.<serial>`:
@@ -90,6 +93,7 @@ well, and the UART API has no wake command. Only the IR remote brings it back.
 - (Timo Schneider) sound (balance, EQ, virtual bass, crossover), settings, playback buttons, network status
 - (Timo Schneider) states grouped into `sound`, `settings`, `info`; outdated states are removed
 - (Timo Schneider) choices for input and EQ preset come from the device
+- (Timo Schneider) device manager: found devices with status, details, refresh and a link to the web interface
 -->
 ### 0.0.2 (2026-10-13)
 

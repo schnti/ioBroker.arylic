@@ -3,6 +3,7 @@
 const utils = require('@iobroker/adapter-core');
 const { Bonjour } = require('bonjour-service');
 const { ArylicDevice } = require('./lib/device');
+const { ArylicDeviceManagement } = require('./lib/device-management');
 
 class Arylic extends utils.Adapter {
     /**
@@ -12,6 +13,7 @@ class Arylic extends utils.Adapter {
         super({ ...options, name: 'arylic' });
         this.devices = new Map();
         this.bonjour = null;
+        this.deviceManagement = new ArylicDeviceManagement(this);
         this.on('ready', this.onReady.bind(this));
         this.on('stateChange', this.onStateChange.bind(this));
         this.on('unload', this.onUnload.bind(this));

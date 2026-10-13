@@ -93,7 +93,10 @@
       {
         "admin": ">=7.6.20"
       }
-    ]
+    ],
+    "supportedMessages": {
+      "deviceManager": true
+    }
   },
   "native": {
     "discovery": true,

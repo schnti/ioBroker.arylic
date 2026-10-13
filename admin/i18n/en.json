@@ -6,5 +6,6 @@
   "Devices": "Devices",
   "Only needed for devices discovery cannot find, e.g. in another subnet.": "Only needed for devices discovery cannot find, e.g. in another subnet.",
   "Name": "Name",
-  "IP address": "IP address"
+  "IP address": "IP address",
+  "Found devices": "Found devices"
 }

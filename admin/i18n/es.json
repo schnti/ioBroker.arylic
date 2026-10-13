@@ -2,6 +2,7 @@
   "Arylic devices announce themselves via mDNS (AirPlay). Needs ioBroker in the same network segment; in Docker use host networking.": "Los dispositivos acrílicos se anuncian a través de mDNS (AirPlay). Necesita ioBroker en el mismo segmento de red; en Docker utilice redes de host.",
   "Devices": "Dispositivos",
   "Find devices automatically": "Encuentra dispositivos automáticamente",
+  "Found devices": "Dispositivos encontrados",
   "IP address": "dirección IP",
   "Name": "Nombre",
   "Only needed for devices discovery cannot find, e.g. in another subnet.": "Solo es necesario para el descubrimiento de dispositivos que no se pueden encontrar, p. en otra subred.",

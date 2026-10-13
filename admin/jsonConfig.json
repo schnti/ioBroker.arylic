@@ -67,6 +67,21 @@
           "validatorNoSaveOnError": true
         }
       ]
+    },
+    "foundHeader": {
+      "type": "header",
+      "text": "Found devices",
+      "size": 3,
+      "newLine": true
+    },
+    "deviceManager": {
+      "type": "deviceManager",
+      "newLine": true,
+      "xs": 12,
+      "sm": 12,
+      "md": 12,
+      "lg": 12,
+      "xl": 12
     }
   }
 }
