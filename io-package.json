@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "arylic",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "news": {
+      "0.0.2": {
+        "en": "published through GitHub Actions (npm trusted publishing)",
+        "de": "veröffentlicht über GitHub Actions (npm trusted publishing)",
+        "ru": "опубликовано через GitHub Actions (надежная публикация npm)",
+        "pt": "publicado no GitHub Actions (publicação confiável npm)",
+        "nl": "gepubliceerd via GitHub Actions (npm trusted publishing)",
+        "fr": "publié via GitHub Actions (npm Trusted Publishing)",
+        "it": "pubblicato tramite GitHub Actions (npm trusted publishing)",
+        "es": "publicado a través de GitHub Actions (npm trusted publishing)",
+        "pl": "opublikowane za pośrednictwem GitHub Actions (zaufane publikowanie npm)",
+        "uk": "опубліковано через дії GitHub (довірена публікація npm)",
+        "zh-cn": "通过 GitHub Actions（npm 信任发布）发布"
+      },
       "0.0.1": {
         "en": "initial release",
         "de": "Erstveröffentlichung",

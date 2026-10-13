@@ -65,7 +65,7 @@ well, and the UART API has no wake command. Only the IR remote brings it back.
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.0.2 (2026-10-13)
 
 - (Timo Schneider) published through GitHub Actions (npm trusted publishing)
 
