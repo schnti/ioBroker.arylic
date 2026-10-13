@@ -1,0 +1,72 @@
+{
+  "i18n": true,
+  "type": "panel",
+  "items": {
+    "discovery": {
+      "type": "checkbox",
+      "label": "Find devices automatically",
+      "help": "Arylic devices announce themselves via mDNS (AirPlay). Needs ioBroker in the same network segment; in Docker use host networking.",
+      "xs": 12,
+      "sm": 12,
+      "md": 6,
+      "lg": 6,
+      "xl": 6
+    },
+    "pollInterval": {
+      "type": "number",
+      "label": "Poll interval",
+      "help": "The device reports changes on its own; the poll catches anything missed.",
+      "unit": "s",
+      "min": 10,
+      "max": 3600,
+      "default": 60,
+      "xs": 12,
+      "sm": 12,
+      "md": 6,
+      "lg": 6,
+      "xl": 6
+    },
+    "devicesHeader": {
+      "type": "header",
+      "text": "Devices",
+      "size": 3,
+      "newLine": true
+    },
+    "devicesHelp": {
+      "type": "staticText",
+      "text": "Only needed for devices discovery cannot find, e.g. in another subnet.",
+      "xs": 12,
+      "sm": 12,
+      "md": 12,
+      "lg": 12,
+      "xl": 12
+    },
+    "devices": {
+      "type": "table",
+      "newLine": true,
+      "xs": 12,
+      "sm": 12,
+      "md": 12,
+      "lg": 12,
+      "xl": 12,
+      "items": [
+        {
+          "type": "text",
+          "attr": "name",
+          "title": "Name",
+          "width": "40%",
+          "validator": "data.name && data.name.length > 0",
+          "validatorNoSaveOnError": true
+        },
+        {
+          "type": "text",
+          "attr": "host",
+          "title": "IP address",
+          "width": "60%",
+          "validator": "data.host && data.host.length > 0",
+          "validatorNoSaveOnError": true
+        }
+      ]
+    }
+  }
+}

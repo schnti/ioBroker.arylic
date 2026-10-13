@@ -1,0 +1,114 @@
+{
+  "common": {
+    "name": "arylic",
+    "version": "0.0.1",
+    "news": {
+      "0.0.1": {
+        "en": "initial release",
+        "de": "Erstveröffentlichung",
+        "ru": "первоначальный выпуск",
+        "pt": "lançamento inicial",
+        "nl": "eerste release",
+        "fr": "version initiale",
+        "it": "prima versione",
+        "es": "versión inicial",
+        "pl": "pierwsze wydanie",
+        "uk": "початковий випуск",
+        "zh-cn": "首次发布"
+      }
+    },
+    "titleLang": {
+      "en": "Arylic amplifiers",
+      "de": "Arylic-Verstärker",
+      "ru": "Усилители Arylic",
+      "pt": "Amplificadores Arylic",
+      "nl": "Arylic-versterkers",
+      "fr": "Amplificateurs Arylic",
+      "it": "Amplificatori Arylic",
+      "es": "Amplificadores Arylic",
+      "pl": "Wzmacniacze Arylic",
+      "uk": "Підсилювачі Arylic",
+      "zh-cn": "Arylic 功放"
+    },
+    "desc": {
+      "en": "Controls Arylic amplifiers (LA50) over the network: volume limit, tone, input, LED, standby",
+      "de": "Steuert Arylic-Verstärker (LA50) über das Netzwerk: Lautstärkebegrenzung, Klang, Eingang, LED, Standby",
+      "ru": "Управление усилителями Arylic (LA50) по сети: ограничение громкости, тембр, вход, светодиод, режим ожидания",
+      "pt": "Controla amplificadores Arylic (LA50) pela rede: limite de volume, tom, entrada, LED, standby",
+      "nl": "Bedient Arylic-versterkers (LA50) via het netwerk: volumebegrenzing, klank, ingang, LED, stand-by",
+      "fr": "Contrôle les amplificateurs Arylic (LA50) via le réseau : limite de volume, tonalité, entrée, LED, veille",
+      "it": "Controlla gli amplificatori Arylic (LA50) via rete: limite di volume, toni, ingresso, LED, standby",
+      "es": "Controla amplificadores Arylic (LA50) por la red: límite de volumen, tono, entrada, LED, espera",
+      "pl": "Steruje wzmacniaczami Arylic (LA50) przez sieć: limit głośności, barwa, wejście, LED, czuwanie",
+      "uk": "Керування підсилювачами Arylic (LA50) через мережу: обмеження гучності, тембр, вхід, світлодіод, режим очікування",
+      "zh-cn": "通过网络控制 Arylic 功放（LA50）：音量上限、音调、输入、LED、待机"
+    },
+    "authors": [
+      "Timo Schneider <timo@schnti.de>"
+    ],
+    "keywords": [
+      "arylic",
+      "LA50",
+      "amplifier",
+      "audio"
+    ],
+    "licenseInformation": {
+      "type": "free",
+      "license": "MIT"
+    },
+    "platform": "Javascript/Node.js",
+    "icon": "arylic.png",
+    "enabled": true,
+    "extIcon": "https://raw.githubusercontent.com/schnti/ioBroker.arylic/main/admin/arylic.png",
+    "readme": "https://github.com/schnti/ioBroker.arylic/blob/main/README.md",
+    "loglevel": "info",
+    "tier": 3,
+    "mode": "daemon",
+    "type": "multimedia",
+    "compact": true,
+    "connectionType": "local",
+    "dataSource": "push",
+    "adminUI": {
+      "config": "json"
+    },
+    "dependencies": [
+      {
+        "js-controller": ">=6.0.11"
+      }
+    ],
+    "globalDependencies": [
+      {
+        "admin": ">=7.4.10"
+      }
+    ]
+  },
+  "native": {
+    "discovery": true,
+    "pollInterval": 60,
+    "devices": []
+  },
+  "objects": [],
+  "instanceObjects": [
+    {
+      "_id": "info",
+      "type": "channel",
+      "common": {
+        "name": "Information"
+      },
+      "native": {}
+    },
+    {
+      "_id": "info.connection",
+      "type": "state",
+      "common": {
+        "role": "indicator.connected",
+        "name": "At least one device connected",
+        "type": "boolean",
+        "read": true,
+        "write": false,
+        "def": false
+      },
+      "native": {}
+    }
+  ]
+}

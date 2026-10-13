@@ -1,0 +1,10 @@
+{
+  "Find devices automatically": "Find devices automatically",
+  "Arylic devices announce themselves via mDNS (AirPlay). Needs ioBroker in the same network segment; in Docker use host networking.": "Arylic devices announce themselves via mDNS (AirPlay). Needs ioBroker in the same network segment; in Docker use host networking.",
+  "Poll interval": "Poll interval",
+  "The device reports changes on its own; the poll catches anything missed.": "The device reports changes on its own; the poll catches anything missed.",
+  "Devices": "Devices",
+  "Only needed for devices discovery cannot find, e.g. in another subnet.": "Only needed for devices discovery cannot find, e.g. in another subnet.",
+  "Name": "Name",
+  "IP address": "IP address"
+}
