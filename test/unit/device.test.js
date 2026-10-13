@@ -87,6 +87,23 @@ describe('ArylicDevice queue', () => {
         assert.deepStrictEqual(adapter.states['kueche.standby'], { val: false, ack: true });
     });
 
+    it('does not write an unchanged value again', () => {
+        const { adapter, device } = deviceWithTransport();
+        device.handle('VOL:10');
+        adapter.states['kueche.volume'].ack = 'marker';
+        device.handle('VOL:10');
+        assert.strictEqual(adapter.states['kueche.volume'].ack, 'marker');
+    });
+
+    it('always confirms the answer to a command, even if the value did not change', () => {
+        const { adapter, device } = deviceWithTransport();
+        device.handle('VOL:10');
+        device.write('volume', 30);
+        adapter.states['kueche.volume'] = { val: 30, ack: false };
+        device.handle('VOL:10');
+        assert.deepStrictEqual(adapter.states['kueche.volume'], { val: 10, ack: true });
+    });
+
     it('ignores writes to read-only states', () => {
         const { device, sent } = deviceWithTransport();
         device.write('playing', true);

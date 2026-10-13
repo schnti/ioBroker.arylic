@@ -3,6 +3,8 @@
 const utils = require('@iobroker/adapter-core');
 const { Bonjour } = require('bonjour-service');
 const { ArylicDevice } = require('./lib/device');
+const { FIELDS } = require('./lib/fields');
+const { SERVICE_TYPE, parseService } = require('./lib/discovery');
 const { ArylicDeviceManagement } = require('./lib/device-management');
 
 class Arylic extends utils.Adapter {
@@ -27,8 +29,8 @@ class Arylic extends utils.Adapter {
             if (!entry.host) {
                 continue;
             }
-            const id = this.toId(entry.name || entry.host);
-            await this.addDevice(id, entry.name || entry.host, entry.host);
+            const name = entry.name || entry.host;
+            await this.addDevice({ id: this.toId(name), name, host: entry.host });
         }
 
         if (this.config.discovery) {
@@ -37,70 +39,57 @@ class Arylic extends utils.Adapter {
         if (!this.devices.size && !this.config.discovery) {
             this.log.warn('No devices configured and discovery is off');
         }
-
-        this.subscribeStates('*');
     }
 
-    /**
-     * Arylic devices announce themselves as AirPlay receivers with
-     * `manufacturer=Arylic` and their serial number in the TXT record.
-     */
     startDiscovery() {
         this.bonjour = new Bonjour();
-        const browser = this.bonjour.find({ type: 'airplay' });
-        browser.on('up', service => {
+        this.bonjour.find({ type: SERVICE_TYPE }).on('up', service => {
             this.onServiceUp(service).catch(err => this.log.error(`Discovery: ${err.message}`));
         });
-        this.log.info('Discovery started (mDNS, _airplay._tcp)');
+        this.log.info(`Discovery started (mDNS, _${SERVICE_TYPE}._tcp)`);
     }
 
     /**
      * @param {import('bonjour-service').Service} service announced AirPlay service
      */
     async onServiceUp(service) {
-        const txt = service.txt || {};
-        if (String(txt.manufacturer).toLowerCase() !== 'arylic') {
+        const found = parseService(service);
+        if (!found) {
             return;
         }
-        const host = (service.addresses || []).find(a => /^\d+\.\d+\.\d+\.\d+$/.test(a)) || service.referer?.address;
-        if (!host) {
-            return;
-        }
-        const info = { model: txt.model, serial: txt.serialNumber, firmware: txt.fv };
-
-        // A manually configured device with this address takes precedence.
-        const known = [...this.devices.values()].find(d => d.serial === txt.serialNumber || d.host === host);
+        // Known by serial number, or a manually configured device at this address.
+        const known = [...this.devices.values()].find(
+            d => d.info.serial === found.info.serial || d.host === found.host,
+        );
         if (known) {
-            known.serial = txt.serialNumber;
-            known.setHost(host);
-            await known.setInfo(info);
+            known.setInfo(found.info);
+            known.setHost(found.host);
             return;
         }
-        if (!txt.serialNumber) {
-            return;
-        }
-        this.log.info(`Discovered ${txt.model || 'Arylic'} "${service.name}" at ${host}`);
-        const device = await this.addDevice(this.toId(txt.serialNumber), service.name, host);
-        device.serial = txt.serialNumber;
-        await device.setInfo(info);
+        this.log.info(`Discovered ${found.info.model || 'Arylic'} "${found.name}" at ${found.host}`);
+        await this.addDevice({ id: this.toId(found.info.serial), ...found });
     }
 
     /**
-     * @param {string} id object id below the instance
-     * @param {string} name display name
-     * @param {string} host IP address or host name
+     * @param {object} options device options
+     * @param {string} options.id object id below the instance
+     * @param {string} options.name display name
+     * @param {string} options.host IP address or host name
+     * @param {Record<string, string>} [options.info] model, serial, firmware from mDNS
      * @returns {Promise<ArylicDevice>} the started device
      */
-    async addDevice(id, name, host) {
+    async addDevice({ id, name, host, info }) {
         const device = new ArylicDevice(this, {
             id,
             name,
             host,
+            info,
             pollMs: this.pollMs,
             onConnectionChange: () => this.updateConnection(),
         });
         this.devices.set(id, device);
         await device.createObjects();
+        await Promise.all(FIELDS.filter(f => f.write).map(f => this.subscribeStatesAsync(`${id}.${f.id}`)));
         device.start();
         return device;
     }

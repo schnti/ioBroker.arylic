@@ -9,27 +9,18 @@
 
 const { Bonjour } = require('bonjour-service');
 const { ArylicDevice } = require('../lib/device');
+const { SERVICE_TYPE, parseService } = require('../lib/discovery');
 
 const RUN_MS = 20 * 1000;
 
 const adapter = {
-    log: {
-        info: msg => console.log(msg),
-        warn: msg => console.warn(msg),
-        debug() {},
-        error: msg => console.error(msg),
-    },
+    log: { info: console.log, warn: console.warn, debug() {}, error: console.error },
     async extendObjectAsync() {},
-    async setStateAsync(id, val) {
-        console.log(`${id.padEnd(40)} ${JSON.stringify(val)}`);
-    },
-    setState(id, val) {
-        console.log(`${id.padEnd(40)} ${JSON.stringify(val)}`);
-    },
-    setTimeout: (fn, ms) => setTimeout(fn, ms),
-    clearTimeout: timer => clearTimeout(timer),
-    setInterval: (fn, ms) => setInterval(fn, ms),
-    clearInterval: timer => clearInterval(timer),
+    setState: (id, val) => console.log(`${id.padEnd(40)} ${JSON.stringify(val)}`),
+    setTimeout,
+    clearTimeout,
+    setInterval,
+    clearInterval,
 };
 
 const devices = new Map();
@@ -38,11 +29,9 @@ function start(id, name, host, info) {
     if (devices.has(id)) {
         return;
     }
-    const device = new ArylicDevice(adapter, { id, name, host, pollMs: RUN_MS, onConnectionChange() {} });
+    const device = new ArylicDevice(adapter, { id, name, host, info, pollMs: RUN_MS, onConnectionChange() {} });
     devices.set(id, device);
-    if (info) {
-        device.setInfo(info);
-    }
+    device.setInfo(device.info);
     device.start();
 }
 
@@ -51,20 +40,14 @@ const host = process.argv[2];
 if (host) {
     start(host, host, host);
 } else {
-    console.log('Searching via mDNS (_airplay._tcp, manufacturer=Arylic) …');
+    console.log(`Searching via mDNS (_${SERVICE_TYPE}._tcp, manufacturer=Arylic) …`);
     bonjour = new Bonjour();
-    bonjour.find({ type: 'airplay' }).on('up', service => {
-        const txt = service.txt || {};
-        if (String(txt.manufacturer).toLowerCase() !== 'arylic' || !txt.serialNumber) {
-            return;
+    bonjour.find({ type: SERVICE_TYPE }).on('up', service => {
+        const found = parseService(service);
+        if (found) {
+            console.log(`Found ${found.info.model} "${found.name}" at ${found.host}`);
+            start(found.info.serial.toLowerCase(), found.name, found.host, found.info);
         }
-        const address = (service.addresses || []).find(a => /^\d+\.\d+\.\d+\.\d+$/.test(a));
-        console.log(`Found ${txt.model} "${service.name}" at ${address}`);
-        start(txt.serialNumber.toLowerCase(), service.name, address, {
-            model: txt.model,
-            serial: txt.serialNumber,
-            firmware: txt.fv,
-        });
     });
 }
 
