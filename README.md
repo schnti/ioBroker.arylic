@@ -59,6 +59,14 @@ stays `ack=false`, the device did not accept the command.
 ⚠️ **Standby:** Nothing over the network wakes an LA50 from standby — the web interface is gone as
 well, and the UART API has no wake command. Only the IR remote brings it back.
 
+## Development
+
+- `npm test` — unit tests and package checks
+- `npm run live` — finds devices via mDNS and reads all values, without ioBroker; nothing is written.
+  `npm run live -- 10.0.0.61` connects to one address.
+
+Pushes are tested on Linux only; release tags run the full matrix (Linux, Windows, macOS).
+
 ## Changelog
 
 <!--

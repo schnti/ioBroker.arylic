@@ -40,7 +40,8 @@
     "test:integration": "mocha test/integration --exit",
     "test": "npm run test:unit && npm run test:package",
     "translate": "translate-adapter",
-    "release": "release-script"
+    "release": "release-script",
+    "live": "node test/live.js"
   },
   "dependencies": {
     "@iobroker/adapter-core": "^3.4.3",
