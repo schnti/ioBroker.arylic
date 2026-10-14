@@ -26,8 +26,10 @@ this can be added as a second transport — if you own such a device and can tes
 ## Finding devices
 
 With **Find devices automatically** on, the adapter listens for AirPlay announcements (mDNS) carrying
-`manufacturer=Arylic`. The serial number is the device's object id, so a new IP address is picked up
-without any change. ioBroker must be in the same network segment; in Docker, use host networking.
+`manufacturer=Arylic`. The serial number is the device's object id; the network is asked again every
+5 minutes, so a new IP address is picked up within that time. Devices found earlier are connected
+right away after a restart. ioBroker must be in the same network segment; in Docker, use host
+networking.
 
 Devices in another subnet can be entered by IP address.
 
@@ -76,7 +78,9 @@ A write is a command (`ack=false`). The device's answer sets the value again wit
 stays `ack=false`, the device did not accept the command.
 
 ⚠️ **Standby:** Nothing over the network wakes an LA50 from standby — the web interface is gone as
-well, and the UART API has no wake command. Only the IR remote brings it back.
+well, and the UART API has no wake command. Only the IR remote brings it back. This applies to the
+`standby` button and to `settings.standbyOnPower`, which makes the device start in standby after
+every power cut.
 
 ## Development
 
@@ -89,12 +93,16 @@ well, and the UART API has no wake command. Only the IR remote brings it back.
 <!--
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
+-->
+### **WORK IN PROGRESS**
 
 - (Timo Schneider) sound (balance, EQ, virtual bass, crossover), settings, playback buttons, network status
-- (Timo Schneider) states grouped into `sound`, `settings`, `info`; outdated states are removed
+- (Timo Schneider) states grouped into `sound`, `settings`, `info`; outdated states are removed — **state ids changed**
 - (Timo Schneider) choices for input and EQ preset come from the device
-- (Timo Schneider) device manager: found devices with status, details, refresh and a link to the web interface
--->
+- (Timo Schneider) device manager: found devices with status, details, refresh and a link to the web interface (admin 7.8.1 or newer)
+- (Timo Schneider) written values are checked: `"false"`/`"0"` count as false, numbers are limited to their range, text must not contain `;`
+- (Timo Schneider) a device that stops answering is reconnected; an address change is picked up within 5 minutes
+- (Timo Schneider) the device name comes from the device; quick button presses are no longer merged
 ### 0.0.2 (2026-10-13)
 
 - (Timo Schneider) published through GitHub Actions (npm trusted publishing)

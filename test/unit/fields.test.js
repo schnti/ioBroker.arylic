@@ -52,4 +52,32 @@ describe('fields', () => {
         assert.strictEqual(commandFor(BY_ID.get('standby'), true), 'SYS:STANDBY');
         assert.strictEqual(commandFor(BY_ID.get('standby'), false), null);
     });
+
+    it('reads strings and numbers as booleans the way scripts write them', () => {
+        assert.strictEqual(commandFor(BY_ID.get('standby'), 'false'), null);
+        assert.strictEqual(commandFor(BY_ID.get('standby'), 0), null);
+        assert.strictEqual(commandFor(BY_ID.get('mute'), 'false'), 'MUT:0');
+        assert.strictEqual(commandFor(BY_ID.get('settings.standbyOnPower'), '0'), 'SOP:0');
+        assert.strictEqual(commandFor(BY_ID.get('settings.led'), 'true'), 'LED:1');
+        assert.throws(() => commandFor(BY_ID.get('mute'), 'yes'), RangeError);
+    });
+
+    it('rejects values that must not be sent', () => {
+        assert.throws(() => commandFor(BY_ID.get('maxVolume'), null), RangeError);
+        assert.throws(() => commandFor(BY_ID.get('maxVolume'), ''), RangeError);
+        assert.throws(() => commandFor(BY_ID.get('volume'), '50%'), RangeError);
+        assert.throws(() => commandFor(BY_ID.get('source'), 'NET;SYS:STANDBY'), RangeError);
+        assert.throws(() => commandFor(BY_ID.get('settings.name'), null), RangeError);
+    });
+
+    it('limits numbers to their range', () => {
+        assert.strictEqual(commandFor(BY_ID.get('maxVolume'), 10), 'MXV:30');
+        assert.strictEqual(commandFor(BY_ID.get('volume'), 150), 'VOL:100');
+    });
+
+    it('ignores answers it cannot read', () => {
+        assert.deepStrictEqual(parseMessage('VOL:'), { code: 'VOL' });
+        assert.deepStrictEqual(parseMessage('MUT:x'), { code: 'MUT' });
+        assert.deepStrictEqual(parseMessage('NAM:zz'), { code: 'NAM' });
+    });
 });
