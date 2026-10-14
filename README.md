@@ -100,7 +100,7 @@ every power cut.
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.1.2 (2026-10-14)
 
 - (Timo Schneider) maximum volume uses the role `level` instead of the unknown `level.volume.max`
 - (Timo Schneider) names of states, channels and device manager labels in all ioBroker languages

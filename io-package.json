@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "arylic",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "news": {
+      "0.1.2": {
+        "en": "maximum volume uses the role `level` instead of the unknown `level.volume.max`\nnames of states, channels and device manager labels in all ioBroker languages",
+        "de": "Maximum Volume verwendet die Rolle `Level` statt `level.volume.max`\nBundesnamen, Kanäle und Gerätemanager in allen ioBroker-Sprachen",
+        "ru": "максимальная громкость использует роль `level` вместо неизвестного `level.volume.max`\nназвания штатов, каналов и ярлыков диспетчера устройств на всех языках IOBroker",
+        "pt": "volume máximo usa a função `level` em vez de `level.volume.max`\nnomes de estados, canais e selos em todos os idiomas da ioBroker",
+        "nl": "maximum volume gebruikt de rol `level` in plaats van de onbekende `level.volume.max`\nnamen van staten, kanalen en labels voor apparaatbeheerders in alle talen van IOBroker",
+        "fr": "maximum volume utilise le rôle « level » au lieu de l'inconnu « level.volume.max »\nnoms des États, chaînes et labels Device Manager dans toutes les langues d'IOBroker",
+        "it": "maximum volume usa il ruolo `level` anziché `level.volume.max` sconosciuto\nnomi di stati, canali ed etichette Device Manager in tutte le lingue di IOBroker",
+        "es": "maximum volume usa el rol `level' en lugar del desconocido `level.volume.max`\nnombres de estados, canales y etiquetas de gestión de dispositivos en todos los idiomas de ioBroker",
+        "pl": "maksymalna objętość używa roli `level` zamiast nieznanego `level.volume.max`\nnazwy stanów, kanałów i etykiet menedżera urządzeń we wszystkich językach iOBroker",
+        "uk": "максимальна гучність використовує роль `level` замість невідомого `level.volume.max`\nназви станів, каналів та міток диспетчера пристроїв у всіх мовах IObroker",
+        "zh-cn": "最大音量使用角色 “等级” 而不是未知的 “level.volume.max”\n所有 IOBroker 语言的州、频道和设备管理器标签的名称"
+      },
       "0.1.1": {
         "en": "readable names (English, German) for all states and channels; buttons start with a value",
         "de": "lesbare Namen (DE, EN) für alle Staaten und Kanäle; Buttons beginnen mit einem Wert",
