@@ -94,7 +94,7 @@ every power cut.
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.1.0 (2026-10-14)
 
 - (Timo Schneider) sound (balance, EQ, virtual bass, crossover), settings, playback buttons, network status
 - (Timo Schneider) states grouped into `sound`, `settings`, `info`; outdated states are removed — **state ids changed**
@@ -103,6 +103,7 @@ every power cut.
 - (Timo Schneider) written values are checked: `"false"`/`"0"` count as false, numbers are limited to their range, text must not contain `;`
 - (Timo Schneider) a device that stops answering is reconnected; an address change is picked up within 5 minutes
 - (Timo Schneider) the device name comes from the device; quick button presses are no longer merged
+
 ### 0.0.2 (2026-10-13)
 
 - (Timo Schneider) published through GitHub Actions (npm trusted publishing)
