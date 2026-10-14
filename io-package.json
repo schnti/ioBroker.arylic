@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "arylic",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "news": {
+      "0.1.1": {
+        "en": "readable names (English, German) for all states and channels; buttons start with a value",
+        "de": "lesbare Namen (DE, EN) für alle Staaten und Kanäle; Buttons beginnen mit einem Wert",
+        "ru": "читаемые названия (английский, немецкий) для всех штатов и каналов; кнопки начинаются со значения",
+        "pt": "nomes legíveis (inglês, alemão) de todos os estados e canais; botões começam com um valor",
+        "nl": "leesbare namen (Engels, Duits) voor alle staten en kanalen; knoppen beginnen met een waarde",
+        "fr": "noms lisibles (anglais, allemand) pour tous les états et chaînes ; boutons commençant par une valeur",
+        "it": "nomi leggibili (inglese, tedesco) per tutti gli stati e canali; i tasti iniziano con un valore",
+        "es": "nombres legibles (inglés, alemán) para todos los estados y canales; los botones empiezan por un valor",
+        "pl": "czytelne nazwy (angielski, niemiecki) dla wszystkich stanów i kanałów; przyciski zaczynają się od wartości",
+        "uk": "читаються назви (англійська, німецька) для всіх штатів і каналів; кнопки починаються зі значення",
+        "zh-cn": "所有州和频道的可读名称（英语、德语）；按钮以值开头"
+      },
       "0.1.0": {
         "en": "sound (balance, EQ, virtual bass, crossover), settings, playback buttons, network status\nstates grouped into `sound`, `settings`, `info`; outdated states are removed — **state ids changed**\nchoices for input and EQ preset come from the device\ndevice manager: found devices with status, details, refresh and a link to the web interface (admin 7.8.1 or newer)\nwritten values are checked: `\"false\"`/`\"0\"` count as false, numbers are limited to their range, text must not contain `;`\na device that stops answering is reconnected; an address change is picked up within 5 minutes\nthe device name comes from the device; quick button presses are no longer merged",
         "de": "Ton (Balance, EQ, Virtual Bass, Crossover), Einstellungen, Abspieltasten, Netzwerkstatus\nStatus gruppiert nach „Sound“, „Settings“, „Info“; veraltete Status werden entfernt — **Status-IDs geändert**\nEingabe und EQ-Preset wählen Sie vom Gerät\nGerätemanager: Geräte mit Status, Details, Refresh und Webinterface gefunden (Admin 7.8.1 oder neuer)\nWerte werden geprüft: `\"false\"`/`\"0\"` gelten als falsch, Zahlen sind begrenzt, Text darf nicht `;`\nGerät, das nicht mehr reagiert, wird neu verbunden; Adressänderung innerhalb von 5 Minuten\nDer Gerätename stammt vom Gerät; Schnelltasten sind nicht mehr vereint",

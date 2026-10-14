@@ -94,7 +94,7 @@ every power cut.
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.1.1 (2026-10-14)
 
 - (Timo Schneider) readable names (English, German) for all states and channels; buttons start with a value
 
