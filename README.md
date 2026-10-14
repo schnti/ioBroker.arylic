@@ -94,6 +94,10 @@ every power cut.
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+- (Timo Schneider) readable names (English, German) for all states and channels; buttons start with a value
+
 ### 0.1.0 (2026-10-14)
 
 - (Timo Schneider) sound (balance, EQ, virtual bass, crossover), settings, playback buttons, network status
