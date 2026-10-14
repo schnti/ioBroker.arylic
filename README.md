@@ -23,6 +23,12 @@ The LA50 forwards plain text on TCP port 2018 to its amplifier chip, in the form
 the same commands, but wrapped (`MCU+PAS+RAKOIT:…&`) in their TCP API. The adapter is built so that
 this can be added as a second transport — if you own such a device and can test, please open an issue.
 
+## Requirements
+
+- Node.js 22 or newer
+- js-controller 6.0.11 or newer
+- admin 7.8.1 or newer
+
 ## Finding devices
 
 With **Find devices automatically** on, the adapter listens for AirPlay announcements (mDNS) carrying
