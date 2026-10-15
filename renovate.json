@@ -1,0 +1,12 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": ["config:recommended"],
+    "packageRules": [
+        {
+            "description": "Minor and patch updates of lint, test and release tooling in one PR instead of one each.",
+            "matchDepTypes": ["devDependencies"],
+            "matchUpdateTypes": ["minor", "patch"],
+            "groupName": "dev dependencies"
+        }
+    ]
+}
